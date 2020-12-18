@@ -8,12 +8,38 @@
 
 
 
+/// Creates a prefix of css variable based on the specified prefix.
+/// @param {String} $var-prefix the prefix to be applied to css variable.
+/// @return {String} a prefix of css variable.
 @function make-cssvar($var-prefix) {
     @if (string.not-empty($var-prefix)) {
         @return "--#{$var-prefix}-";
     }
     @else {
         @return "--";
+    }
+}
+
+/// Combines two pars into single one, separated by hypen (-).
+/// @param {String} $part-a first part to combine.
+/// @param {String} $part-b second part to combine.
+/// @return {String} combined partA-partB.
+@function part-combine($part-a, $part-b) {
+    @if (string.not-empty($part-a)) {
+        @if (string.not-empty($part-b)) {
+            @return "#{$part-a}-#{$part-b}";
+        }
+        @else {
+            @return $part-a;
+        }
+    }
+    @else {
+        @if (string.not-empty($part-b)) {
+            @return $part-b;
+        }
+        @else {
+            @return "";
+        }
     }
 }
 
