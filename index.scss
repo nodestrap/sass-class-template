@@ -45,11 +45,15 @@
 
 
 
-$alias      : string.unique-id()        !default;
-$class      : ""                        !default;
-$var-root   : ":root"                   !default;
-$var-prefix : string.unique-id()        !default;
-$cssvar     : make-cssvar($var-prefix)  !default;
+$alias              : string.unique-id()                                !default;
+$class              : ""                                                !default;
+$var-root           : ":root"                                           !default;
+$var-prefix         : string.unique-id()                                !default;
+$var-prefix-base    : ""                                                !default;
+@if (string.not-empty($var-prefix-base)) {
+    $var-prefix         : part-combine($var-prefix-base, $var-prefix);
+}
+$cssvar             : make-cssvar($var-prefix)                          !default;
 
 
 
