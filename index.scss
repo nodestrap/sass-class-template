@@ -1,0 +1,80 @@
+// development:
+@use "node_modules/@heymarco/sass-selector/index" as selector;
+@use "node_modules/@heymarco/sass-string/index" as string;
+
+// production:
+// @use "../../../node_modules/@heymarco/sass-selector/index" as selector;
+// @use "../../../node_modules/@heymarco/sass-string/index" as string;
+
+
+
+@function make-cssvar($var-prefix) {
+    @if (str-not-empty($var-prefix)) {
+        @return "--#{$var-prefix}-";
+    }
+    @else {
+        @return "--";
+    }
+}
+
+
+
+$alias      : string.unique-id()        !default;
+$class      : ""                        !default;
+$var-root   : ":root"                   !default;
+$var-prefix : string.unique-id()        !default;
+$cssvar     : make-cssvar($var-prefix)  !default;
+
+
+
+/// Declares css variable on the html page.
+@mixin declare-cssvar {
+    @if (string.not-empty($var-root)) { @include selector.selector($var-root) {
+        @content;
+    }}
+}
+
+
+
+/// Declares the alias-item style.
+/// @param {String} $item the name of the item.
+@mixin alias-of($item) {
+    @include selector.selector(#{$alias}-#{$item}) {
+        @content;
+    }
+}
+
+/// Declares the alias-***any-items*** style.
+@mixin alias-any {
+    @include selector.selector(#{$alias}-) {
+        @content;
+    }
+}
+
+
+
+/// Declares the alias of basic style.
+@mixin alias-basic {
+    @include selector.selector(#{$alias}--) {
+        @content;
+    }
+}
+
+/// Declares the alias of composite style.
+@mixin alias {
+    @include selector.selector(#{$alias}) {
+        @content;
+    }
+}
+
+
+
+@mixin class($base: "") {
+    @if (string.not-empty($base) or string.not-empty($class)) {
+        @include selector.unify($base, $class) {
+            @extend #{$alias} !optional;
+    
+            @content;
+        }
+    }
+}
