@@ -1,15 +1,15 @@
 // development:
-@use "node_modules/@heymarco/sass-selector/index" as selector;
-@use "node_modules/@heymarco/sass-string/index" as string;
+// @use "node_modules/@heymarco/sass-selector/index" as selector;
+// @use "node_modules/@heymarco/sass-string/index" as string;
 
 // production:
-// @use "../../../node_modules/@heymarco/sass-selector/index" as selector;
-// @use "../../../node_modules/@heymarco/sass-string/index" as string;
+@use "../../../node_modules/@heymarco/sass-selector/index" as selector;
+@use "../../../node_modules/@heymarco/sass-string/index" as string;
 
 
 
 @function make-cssvar($var-prefix) {
-    @if (str-not-empty($var-prefix)) {
+    @if (string.not-empty($var-prefix)) {
         @return "--#{$var-prefix}-";
     }
     @else {
