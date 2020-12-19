@@ -1,10 +1,10 @@
 // development:
-@use "node_modules/@heymarco/sass-selector/index" as selector;
-@use "node_modules/@heymarco/sass-string/index" as string;
+// @use "node_modules/@heymarco/sass-selector/index" as selector;
+// @use "node_modules/@heymarco/sass-string/index" as string;
 
 // production:
-// @use "../../../node_modules/@heymarco/sass-selector/index" as selector;
-// @use "../../../node_modules/@heymarco/sass-string/index" as string;
+@use "../../../node_modules/@heymarco/sass-selector/index" as selector;
+@use "../../../node_modules/@heymarco/sass-string/index" as string;
 
 
 
