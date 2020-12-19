@@ -51,7 +51,7 @@
 /// Declares css variable on the html page.
 /// @param {String} $var-root the location of the css variable to declare.
 @mixin declare-cssvar($var-root) {
-    @if (string.not-empty($var-root)) { @include selector.selector($var-root) {
+    @if (string.not-empty($var-root)) { @include selector.is($var-root) {
         @content;
     }}
 }
@@ -62,7 +62,7 @@
 /// @param {String} $alias the name of the module's alias.
 /// @param {String} $item the name of the item.
 @mixin alias-of($alias, $item) {
-    @include selector.selector(#{$alias}-#{$item}) {
+    @include selector.is(#{$alias}-#{$item}) {
         @content;
     }
 }
@@ -70,7 +70,7 @@
 /// Declares the alias-***any-items*** style.
 /// @param {String} $alias the name of the module's alias.
 @mixin alias-any($alias) {
-    @include selector.selector(#{$alias}-) {
+    @include selector.is(#{$alias}-) {
         @content;
     }
 }
@@ -80,7 +80,7 @@
 /// Declares the alias of basic style.
 /// @param {String} $alias the name of the module's alias.
 @mixin alias-basic($alias) {
-    @include selector.selector(#{$alias}--) {
+    @include selector.is(#{$alias}--) {
         @content;
     }
 }
@@ -88,7 +88,7 @@
 /// Declares the alias of composite style.
 /// @param {String} $alias the name of the module's alias.
 @mixin alias($alias) {
-    @include selector.selector(#{$alias}) {
+    @include selector.is(#{$alias}) {
         @content;
     }
 }
