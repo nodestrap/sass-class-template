@@ -1,24 +1,12 @@
 // development:
-// @use "node_modules/@heymarco/sass-selector/index" as selector;
-// @use "node_modules/@heymarco/sass-string/index" as string;
+@use "node_modules/@heymarco/sass-selector/index" as selector;
+@use "node_modules/@heymarco/sass-string/index" as string;
 
 // production:
-@use "../../../node_modules/@heymarco/sass-selector/index" as selector;
-@use "../../../node_modules/@heymarco/sass-string/index" as string;
+// @use "../../../node_modules/@heymarco/sass-selector/index" as selector;
+// @use "../../../node_modules/@heymarco/sass-string/index" as string;
 
 
-
-/// Creates a prefix of css variable based on the specified prefix.
-/// @param {String} $var-prefix the prefix to be applied to css variable.
-/// @return {String} a prefix of css variable.
-@function make-cssvar($var-prefix) {
-    @if (string.not-empty($var-prefix)) {
-        @return "--#{$var-prefix}-";
-    }
-    @else {
-        @return "--";
-    }
-}
 
 /// Combines two pars into single one, separated by hypen (-).
 /// @param {String} $part-a first part to combine.
@@ -43,22 +31,24 @@
     }
 }
 
+/// Creates a prefix of css variable based on the specified prefix.
+/// @param {String} $var-prefix the prefix to be applied to css variable.
+/// @return {String} a prefix of css variable.
+@function make-cssvar($var-prefix, $var-prefix-base) {
+    $var-prefix-comb     : part-combine($var-prefix-base, $var-prefix);
 
-
-$alias              : string.unique-id()                                !default;
-$class              : ""                                                !default;
-$var-root           : ":root"                                           !default;
-$var-prefix         : string.unique-id()                                !default;
-$var-prefix-base    : ""                                                !default;
-@if (string.not-empty($var-prefix-base)) {
-    $var-prefix         : part-combine($var-prefix-base, $var-prefix);
+    @if (string.not-empty($var-prefix-comb)) {
+        @return "--#{$var-prefix-comb}-";
+    }
+    @else {
+        @return "--";
+    }
 }
-$cssvar             : make-cssvar($var-prefix)                          !default;
 
 
 
 /// Declares css variable on the html page.
-@mixin declare-cssvar {
+@mixin declare-cssvar($var-root) {
     @if (string.not-empty($var-root)) { @include selector.selector($var-root) {
         @content;
     }}
@@ -68,14 +58,14 @@ $cssvar             : make-cssvar($var-prefix)                          !default
 
 /// Declares the alias-item style.
 /// @param {String} $item the name of the item.
-@mixin alias-of($item) {
+@mixin alias-of($alias, $item) {
     @include selector.selector(#{$alias}-#{$item}) {
         @content;
     }
 }
 
 /// Declares the alias-***any-items*** style.
-@mixin alias-any {
+@mixin alias-any($alias) {
     @include selector.selector(#{$alias}-) {
         @content;
     }
@@ -84,14 +74,14 @@ $cssvar             : make-cssvar($var-prefix)                          !default
 
 
 /// Declares the alias of basic style.
-@mixin alias-basic {
+@mixin alias-basic($alias) {
     @include selector.selector(#{$alias}--) {
         @content;
     }
 }
 
 /// Declares the alias of composite style.
-@mixin alias {
+@mixin alias($alias) {
     @include selector.selector(#{$alias}) {
         @content;
     }
@@ -99,7 +89,7 @@ $cssvar             : make-cssvar($var-prefix)                          !default
 
 
 
-@mixin class($base: "") {
+@mixin class($class: "", $base: "", $alias) {
     @if (string.not-empty($base) or string.not-empty($class)) {
         @include selector.unify($base, $class) {
             @extend #{$alias} !optional;
