@@ -1,6 +1,6 @@
 {
   "name": "@heymarco/sass-class-template",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A sass utility for making sass module look like oop programming style.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/heyymarco/sass-class-template#readme",
   "dependencies": {
-    "@heymarco/sass-selector": "^1.0.2",
+    "@heymarco/sass-selector": "^1.0.5",
     "@heymarco/sass-string": "^1.0.1"
   }
 }
