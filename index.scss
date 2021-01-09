@@ -95,6 +95,21 @@
 
 
 
+/// Declares the variant style.
+/// @param {String} $alias the name of the module's alias.
+/// @param {String} $name the name of the module's variant.
+@mixin variant-of($alias, $name) {
+    @at-root { @include alias($alias) { @include selector.append("_" + $name) {
+        @content;
+    }}}
+
+    @include selector.append("." + $name) {
+        @extend #{$alias}#{"_" + $name};
+    }
+}
+
+
+
 /// Declares the class selector to the css.
 /// @param {String} $alias the name of the module's alias.
 /// @param {String} $class the name of the module's class -or- "" -or- null.
