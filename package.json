@@ -1,9 +1,11 @@
 {
   "name": "@heymarco/sass-class-template",
-  "version": "1.0.7",
+  "version": "2.0.0",
   "description": "A sass utility for making sass module look like oop programming style.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "sass --load-path=node_modules test.scss:test.css --no-source-map",
+    "watch": "sass --load-path=node_modules src:dist --style compressed --watch",
+    "build": "sass --load-path=node_modules src:dist --style compressed"
   },
   "repository": {
     "type": "git",
@@ -22,7 +24,10 @@
   },
   "homepage": "https://github.com/heyymarco/sass-class-template#readme",
   "dependencies": {
-    "@heymarco/sass-selector": "^1.0.5",
-    "@heymarco/sass-string": "^1.0.1"
+    "@heymarco/sass-selector": "^2.0.0",
+    "@heymarco/sass-string": "^2.0.1"
+  },
+  "devDependencies": {
+    "sass": "^1.32.4"
   }
 }
