@@ -1,14 +1,25 @@
 {
-  "name": "@heymarco/sass-class-template",
+  "name": "@nodestrap/sass-class-template",
   "version": "2.0.1",
   "description": "A sass utility for making sass module look like oop programming style.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "@nodestrap/sass-selector": "^2.0.1",
+    "@nodestrap/sass-string": "^2.0.5"
+  },
+  "devDependencies": {
+    "tilde-sass": "^1.0.0"
+  },
   "scripts": {
     "test": "tilde-sass --file test/*.scss --outFile test/",
     "compile": "tilde-sass --file src/*.scss --outFile dist/ --outputStyle compressed"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/heyymarco/sass-class-template.git"
+    "url": "git+https://github.com/nodestrap/sass-class-template.git"
   },
   "keywords": [
     "sass",
@@ -16,17 +27,10 @@
     "oop",
     "class"
   ],
-  "author": "HeyMarco",
+  "author": "nodestrap, heymarco",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/heyymarco/sass-class-template/issues"
+    "url": "https://github.com/nodestrap/sass-class-template/issues"
   },
-  "homepage": "https://github.com/heyymarco/sass-class-template#readme",
-  "dependencies": {
-    "@heymarco/sass-selector": "^2.0.1",
-    "@heymarco/sass-string": "^2.0.4"
-  },
-  "devDependencies": {
-    "tilde-sass": "^1.0.0"
-  }
+  "homepage": "https://github.com/nodestrap/sass-class-template#readme"
 }
