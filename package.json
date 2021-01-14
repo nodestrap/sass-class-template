@@ -1,8 +1,7 @@
 {
   "name": "@nodestrap/sass-class-template",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A sass utility for making sass module look like oop programming style.",
-  "main": "index.js",
   "directories": {
     "test": "test"
   },
