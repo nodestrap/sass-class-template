@@ -4,9 +4,9 @@
 
 
 /// Combines two pars into single one, separated by hypen (-).
-/// @param {String} $part-a first part to combine.
-/// @param {String} $part-b second part to combine.
-/// @return {String} combined partA-partB.
+/// @param {string} $part-a first part to combine.
+/// @param {string} $part-b second part to combine.
+/// @return {string} combined partA-partB.
 @function part-combine($part-a, $part-b) {
     @if (string.not-empty($part-a)) {
         @if (string.not-empty($part-b)) {
@@ -27,10 +27,10 @@
 }
 
 /// Creates a prefix of css variable based on the specified prefix.
-/// @param {String} $var-prefix the prefix to be applied to css variable.
-/// @param {String} $var-prefix-base the base prefix to be applied to css variable.
-/// @return {String} a prefix of css variable.
-@function make-cssvar($var-prefix, $var-prefix-base) {
+/// @param {string} $var-prefix the prefix to be applied to css variable.
+/// @param {string} $var-prefix-base the base prefix to be applied to css variable.
+/// @return {string} a prefix of css variable.
+@function make-var($var-prefix, $var-prefix-base) {
     $var-prefix-comb     : part-combine($var-prefix-base, $var-prefix);
 
     @if (string.not-empty($var-prefix-comb)) {
@@ -44,8 +44,8 @@
 
 
 /// Declares css variable on the html page.
-/// @param {String} $var-root the location of the css variable to declare.
-@mixin declare-cssvar($var-root) {
+/// @param {string} $var-root the location of the css variable to declare.
+@mixin declare-vars($var-root) {
     @if (string.not-empty($var-root)) { @include selector.is($var-root) {
         @content;
     }}
@@ -53,76 +53,19 @@
 
 
 
-/// Declares the alias-item style.
-/// @param {String} $alias the name of the module's alias.
-/// @param {String} $item the name of the item.
-@mixin alias-of($alias, $item) {
-    @include selector.is(#{$alias}-#{$item}) {
-        @content;
-    }
-}
-
-/// Declares the alias-***any-items*** style.
-/// @param {String} $alias the name of the module's alias.
-@mixin alias-any($alias) {
-    @include selector.is(#{$alias}-) {
-        @content;
-    }
-}
-
-
-
-/// Declares the alias of basic style.
-/// @param {String} $alias the name of the module's alias.
-@mixin alias-basic($alias) {
-    @include selector.is(#{$alias}--) {
-        @content;
-    }
-}
-
-/// Declares the alias of composite style.
-/// @param {String} $alias the name of the module's alias.
-@mixin alias($alias) {
-    @include selector.is(#{$alias}) {
-        @content;
-    }
-}
-
-
-
-/// Declares the variant style.
-/// @param {String} $alias the name of the module's alias.
-/// @param {String} $name the name of the module's variant.
-@mixin variant-of($alias, $name) {
-    @at-root { @include alias($alias) { @include selector.append("_" + $name) {
-        @content;
-    }}}
-
-    @include selector.append("." + $name) {
-        @extend #{$alias}#{"_" + $name};
-    }
-}
-
-
-
 /// Declares the class selector to the css.
-/// @param {String} $alias the name of the module's alias.
-/// @param {String} $class the name of the module's class -or- "" -or- null.
-/// @param {String} $base the name of the module's class' base -or- "" -or- null.
-@mixin class($alias, $class: "", $base: "") {
+/// @param {string} $class the name of the module's class -or- "" -or- null.
+/// @param {string} $base the name of the module's class' base -or- "" -or- null.
+@mixin class($class: "", $base: "") {
     @if (string.not-empty($base) or string.not-empty($class)) {
 
         @if (string.not-empty($base)) { @include selector.is($base) {
             @include selector.append($class) {
-                @extend #{$alias} !optional;
-    
                 @content;
             }
         }}
         @else {
             @include selector.is($class) {
-                @extend #{$alias} !optional;
-    
                 @content;
             }
         }
